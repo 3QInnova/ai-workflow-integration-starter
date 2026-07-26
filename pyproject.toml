@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-workflow-integration-starter"
+version = "1.0.0"
+description = "Production-minded FastAPI starter for secure, auditable AI workflow integrations."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+  { name = "3QInnova LLC" }
+]
+dependencies = [
+  "fastapi>=0.115,<1",
+  "httpx>=0.27,<1",
+  "pydantic>=2.8,<3",
+  "uvicorn[standard]>=0.32,<1"
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
