@@ -34,6 +34,31 @@ flowchart LR
     API -. metadata only .-> Audit["Structured audit events"]
 ```
 
+### Decision lifecycle
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant App as Business application
+    participant API as Workflow API
+    participant Guard as Privacy guard
+    participant AI as Approved AI provider
+    participant Policy as Deterministic policy
+    participant Human as Human reviewer
+
+    App->>API: Support request + correlation ID
+    API->>Guard: Validate and redact PII
+    Guard->>AI: Sanitized structured contract
+    AI-->>API: Recommended action + confidence
+    API->>Policy: Validate schema and evaluate risk
+    alt Safe and confident
+        Policy-->>App: Approved recommendation
+    else Sensitive or uncertain
+        Policy->>Human: Create approval request
+        Human-->>App: Reviewed disposition
+    end
+```
+
 ## Safety boundary
 
 AI output is treated as untrusted input. The provider can recommend an action, but code—not the model—decides whether that action may proceed automatically.
@@ -102,4 +127,3 @@ This repository contains original demonstration code created for public use by 3
 ## License
 
 MIT
-
